@@ -50,11 +50,11 @@ const InputForm = ({charList, nextCharacter, setNextCharacter, maxRoll}) => {
                         charList.map((char, index) => {
                             if(char == defaultValue) {
                                 return (
-                                    <option value={index} key={char.id} selected> { char.name }  {index}</option>
+                                    <option value={index} key={char.id} selected> { char.name }</option>
                                 )
                             } else {
                                 return (
-                                    <option value={index} key={char.id}> { char.name }  {index}</option>
+                                    <option value={index} key={char.id}> { char.name }</option>
                                 )
                             }
                         })

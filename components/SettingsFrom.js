@@ -25,7 +25,7 @@ const SettingsForm = ({charList, setCharList, settings, selectedCharacterList, s
                 setRemovedChars( removedChars => [...removedChars, char.name])
             }
         })
-        console.log("done")
+        // console.log("done")
     }
 
     const handleDisable = (e) => {
@@ -88,11 +88,11 @@ const SettingsForm = ({charList, setCharList, settings, selectedCharacterList, s
                             charList.map((char, index) => {
                                 if(char == defaultValue) {
                                     return (
-                                        <option className="cursor-pointer" value={char.id} key={char.id} selected> { char.name }  {index}</option>
+                                        <option className="cursor-pointer" value={char.id} key={char.id} selected> { char.name }</option>
                                     )
                                 } else {
                                     return (
-                                        <option className="cursor-pointer hover:text-red-500" value={char.id} key={char.id}> { char.name }  {index}</option>
+                                        <option className="cursor-pointer hover:text-red-500" value={char.id} key={char.id}> { char.name }</option>
                                     )
                                 }
                             })
@@ -101,7 +101,7 @@ const SettingsForm = ({charList, setCharList, settings, selectedCharacterList, s
                     <button onClick={handleDisable} className=" mt-4 mb-3 py-2 px-3 font-bold tracking-wide rounded-xl ml-3 w-20  bg-white  hover:button-hover-effects">Disable</button>
                     
                     <label className="text-gray-50 font-semibold px-2 mt-2 mb-2">Set Max Roll: </label>
-                    <input className="text-center mx-4 rounded-xl px-2 py-1 outline-none max-w-[60px] hover:cursor-pointer" type="number" onChange={handleMaxRollChange} />
+                    <input className="text-center mx-4 rounded-xl px-2 py-1 outline-none max-w-[60px] hover:cursor-pointer" type="number" inputMode="numeric" onChange={handleMaxRollChange} />
 
                     
 

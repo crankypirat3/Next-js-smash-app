@@ -26,9 +26,9 @@ const CharListOutput = ({charList, setCharList, nextCharacter, setNextCharacter}
         const list1 = 
             charList.map((char, index) => {
                 if(nextCharacter == index){
-                    return <li ref={testRef} className="text-lg px-4 bg-primary-red rounded-xl font-bold tracking-wider text-white" value={index} key={char.id}> {char.name }</li>
+                    return <li ref={testRef} className="flex text-lg px-4 bg-primary-red rounded-xl font-bold tracking-wider text-white" value={index++} key={char.id}> {char.name }  <span className="ml-auto">{index}</span></li>
                 } else{
-                    return <li className="text-lg px-4 bg-light-gray" value={index} key={char.id}>{char.name} and {index}</li>
+                    return <li className=" flex text-lg px-4 bg-light-gray" value={index++} key={char.id}>{char.name} <span className="ml-auto">{index}</span></li>
                 }
             })
         
