@@ -1,20 +1,17 @@
 
 import { useEffect, useRef, useState } from "react"
 
-const CharListOutput = ({charList, setCharList, nextCharacter, setNextCharacter}) => {
-    // const [activeChar, setActiveChar] = useState()
-    // console.log(nextCharacter)
-
+const CharListOutput = ({charList, nextCharacter}) => {
+   
     const testRef = useRef(null) 
 
     useEffect(() => {
-        // console.log('next char upated')
         if(nextCharacter != 0) {
             testRef.current.scrollIntoView({behavior: "smooth", block: "center"});
+            console.log
         }
     },[nextCharacter])
 
-    // const testRef = useRef()
 
     // const scrollToActive = () => {
     //     testRef.scroll
@@ -34,8 +31,8 @@ const CharListOutput = ({charList, setCharList, nextCharacter, setNextCharacter}
         
         return(
             <div className="">
-                <h2 className="text-2xl text-center font-semibold text-primary-red mb-3 underline underline-offset-4 decoration-secondary-gray md:text-left ">Character List</h2>
-                <ul className="">
+                <h2 className="text-2xl text-center font-semibold sticky text-primary-red bg-light-gray px-2 py-3 underline underline-offset-4 decoration-secondary-gray md:text-left on">Character List</h2>
+                <ul className="max-h-[85vh] overflow-y-scroll no-scrollbar">
                     { list1 }
                 </ul>
             </div>

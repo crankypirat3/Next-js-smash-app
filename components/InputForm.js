@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react"
 
 
-const InputForm = ({charList, nextCharacter, setNextCharacter, maxRoll}) => {
-    const [roll, setRoll] = useState(null);
+const InputForm = ({charList, setNextCharacter,roll, setRoll, maxRoll}) => {
+    // const [roll, setRoll] = useState(null);
     const [previousCharacter, setPreviousCharacter] = useState(0)
     const [defaultValue, setDefaultValue] = useState()
     // const [nextCharacter, setNextCharacter] = useState(null);   
 
     useEffect(() => {
         setDefaultValue(charList[0])
-        // console.log(charList[0])
     },[charList])
     
     const handleRoll = (min, max) => {       
@@ -29,12 +28,13 @@ const InputForm = ({charList, nextCharacter, setNextCharacter, maxRoll}) => {
         e.preventDefault()       
         let nextCharacterIndex = previousCharacter + roll; 
         if(previousCharacter + roll > charList.length-1) {
-            console.log('tooo high')
             setNextCharacter(charList.length-1)
+            sessionStorage.setItem("Next-Character", charList.length-1)
         } else{
             setNextCharacter(nextCharacterIndex)
+            sessionStorage.setItem("Next-Character", nextCharacterIndex)
         }
-    } 
+    }
 
     {if(!charList) {
         return(
@@ -46,6 +46,7 @@ const InputForm = ({charList, nextCharacter, setNextCharacter, maxRoll}) => {
                 <h2 className="text-lg text-gray-50 font-bold text-center pt-3 pb-2">Smash Dice Game</h2>
                 <label className="text-gray-50 font-semibold px-2 mt-4 mb-2">Previous Character:</label>
                 <select className=" mx-4 rounded-xl px-5 py-1 outline-none" type="select" defaultValue={defaultValue} name="previousCharacter" onChange={ handleCharacterSelect } placeholder="  Last Character">
+
                     {
                         charList.map((char, index) => {
                             if(char == defaultValue) {
