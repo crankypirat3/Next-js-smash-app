@@ -1,5 +1,9 @@
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef} from "react"
+
+// export function scrollThere() {
+//     testRef.current.scrollIntoView({behavior: "smooth", block: "center"});
+// }
 
 const CharListOutput = ({charList, nextCharacter}) => {
    
@@ -8,15 +12,14 @@ const CharListOutput = ({charList, nextCharacter}) => {
     useEffect(() => {
         if(nextCharacter != 0) {
             testRef.current.scrollIntoView({behavior: "smooth", block: "center"});
-            console.log
         }
+        // testRef.current.scrollIntoView({behavior: "smooth", block: "center"});
+
     },[nextCharacter])
 
+       
 
-    // const scrollToActive = () => {
-    //     testRef.scroll
-    // }
-
+   
     if(!charList) {
         <p>loading</p>
     } else {
@@ -32,7 +35,7 @@ const CharListOutput = ({charList, nextCharacter}) => {
         return(
             <div className="">
                 <h2 className="text-2xl text-center font-semibold sticky text-primary-red bg-light-gray px-2 py-3 underline underline-offset-4 decoration-secondary-gray md:text-left on">Character List</h2>
-                <ul className="max-h-[85vh] overflow-y-scroll no-scrollbar">
+                <ul className="">
                     { list1 }
                 </ul>
             </div>

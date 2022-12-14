@@ -27,6 +27,11 @@
   scrollbar-width: none;  /* Firefox */
 }
 
+/* Hide input number in Firefox  */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 html,
 body {
   padding: 0;

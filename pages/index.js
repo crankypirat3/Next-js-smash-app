@@ -9,22 +9,22 @@ import { get, ref } from 'firebase/database'
 import { useEffect, useState } from 'react'
 import CharListOutput from '../components/CharListOutput'
 import SettingsForm from '../components/SettingsFrom'
-import Footer from '../components/Footer';
 import RemovedCharList from '../components/RemovedCharList';
 import Loading from '../components/Loading';
+
+
 
 export default function Home() {
 
   const [charList, setCharList] = useState(null)
-  const [nextCharacter, setNextCharacter] = useState(0);   
+  const [nextCharacter, setNextCharacter] = useState(0);  
+  const [previousCharacter, setPreviousCharacter] = useState(0)
+ 
   const [settings, setSettings] = useState(true);
   const [selectedCharacterList, setSelectedCharacterList] = useState([]);
   const [maxRoll, setMaxRoll] = useState(30);
 
   const [roll, setRoll] = useState(null);
-
-
-  const [sessionData, setSessionData] = useState()
 
 
   const [removedChars, setRemovedChars] = useState([])
@@ -42,16 +42,17 @@ export default function Home() {
       if(sessionStorage.getItem("Disabled-Characters")) {
         setRemovedChars(JSON.parse(sessionStorage["Disabled-Characters"]))
       }
-      // setRemovedChars(JSON.parse(sessionStorage["Disabled-Characters"]))
-      // console.log(JSON.parse(sessionStorage["list"]))
     } else {
       createNewGame()
     }
   },[])
-  // ############## TODOs ###############
+  // ############## TODOs (Bugs) ###############
   //    - Ensure hightlighted player does not reset after refresh                 --Done 
   //    - Ensure disabled charectors and set to disable box persits refresh       --Done      
   //    - Ensure all session storage values reset when a new game is created      --Done
+
+  //    - Fix scrolling bug after calculating next character                      --Done
+  //    - Previous Character maintaining after  refresh                           --Done
 
 
 
@@ -66,12 +67,13 @@ export default function Home() {
         setCharList(snapshot.val().characters);
         sessionStorage.setItem("list", JSON.stringify(snapshot.val().characters))
         setNextCharacter(0);
-        sessionStorage.setItem("Next-Character", 0)
+        sessionStorage.setItem("Next-Character", '0')
         setSelectedCharacterList([])
         sessionStorage.setItem("To-Be-Disabled", [])
         setRemovedChars([])
         sessionStorage.setItem("Disabled-Characters", "")
-        setRoll(null)
+        setRoll(0)
+        setPreviousCharacter(0)
       } else {
         console.log("No data available");
       }})
@@ -85,7 +87,7 @@ export default function Home() {
           <Header settings={settings} setSettings={setSettings} />
           {/* md:fixed md:mt-3 2xl:left-[150px] */}
           <div className='flex flex-col items-center md:fixed md:mt-3 2xl:left-[150px]'>
-            <InputForm charList={charList} nextCharacter={nextCharacter} setNextCharacter={setNextCharacter} roll={roll} setRoll={setRoll} maxRoll={maxRoll} />
+            <InputForm charList={charList} nextCharacter={nextCharacter} setNextCharacter={setNextCharacter} roll={roll} setRoll={setRoll} maxRoll={maxRoll} previousCharacter={previousCharacter} setPreviousCharacter={setPreviousCharacter} />
             <SettingsForm  charList={charList} setCharList={setCharList} settings={settings} setSettings={setSettings} selectedCharacterList={selectedCharacterList} setSelectedCharacterList={setSelectedCharacterList} removedChars={removedChars} setRemovedChars={setRemovedChars} maxRoll={maxRoll} setMaxRoll={setMaxRoll} />
             <button className='px-4 py-3 bg-primary-red text-white font-semibold tracking-wide my-3 rounded-xl' onClick={createNewGame}>New Game </button>          
           </div>

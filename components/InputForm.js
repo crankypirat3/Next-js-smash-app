@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react"
+import { scrollThere } from "./CharListOutput"
 
 
-const InputForm = ({charList, setNextCharacter,roll, setRoll, maxRoll}) => {
+const InputForm = ({charList, setNextCharacter,roll, setRoll, maxRoll, previousCharacter,setPreviousCharacter}) => {
     // const [roll, setRoll] = useState(null);
-    const [previousCharacter, setPreviousCharacter] = useState(0)
+    // const [previousCharacter, setPreviousCharacter] = useState(0)
     const [defaultValue, setDefaultValue] = useState()
     // const [nextCharacter, setNextCharacter] = useState(null);   
 
@@ -25,7 +26,7 @@ const InputForm = ({charList, setNextCharacter,roll, setRoll, maxRoll}) => {
     }
 
     const handleSubmit = (e) => {
-        e.preventDefault()       
+        e.preventDefault();       
         let nextCharacterIndex = previousCharacter + roll; 
         if(previousCharacter + roll > charList.length-1) {
             setNextCharacter(charList.length-1)
@@ -34,6 +35,7 @@ const InputForm = ({charList, setNextCharacter,roll, setRoll, maxRoll}) => {
             setNextCharacter(nextCharacterIndex)
             sessionStorage.setItem("Next-Character", nextCharacterIndex)
         }
+        // scrollThere()
     }
 
     {if(!charList) {
